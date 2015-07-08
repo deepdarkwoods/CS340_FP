@@ -16,7 +16,7 @@ include 'header.php';
 <body>    
     <h1>Hotel Reservations</h1>
     
-    <form action="createRES.php" method="post">
+    <form action="searchRooms.php" method="post">
         <fieldset><legend>Add a Reservation</legend>
         Check-In Date:<br>
         <input type="date" name="checkin" required><br>
