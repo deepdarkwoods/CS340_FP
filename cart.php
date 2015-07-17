@@ -1,49 +1,44 @@
 <?php
 session_start();
-
-if(isset($_GET["add"]))
-
+if(!isset($_SESSION["roomsselected"]))
     {
-        if(!isset($_SESSION["cart"]))
-            {
-                $_SESSION["cart"] = array();
-                array_push($_SESSION["cart"],$_GET["add"]);
-            }
-        else
-            {
-                array_push($_SESSION["cart"],$_GET["add"]);
-                showCart();
-            }
+       $_SESSION["roomsselected"] = array();
+    }
+
+
+
+if(isset($_SESSION["roomsselected"]))
+{
+    echo    "<form action='checkout.php' method='post' >";
+    echo    "<input type='submit' value='Checkout' > "  ;
+    echo    "</form>";
+}
+
+
+
+ 
     
-    }
-
-if(isset($_GET["remove"]))
-
-    {
+//Check if room is already in cart
+    
+    if(isset($_GET["addCart"]))
+       {
         
-        $index = array_search($_GET["remove"], $_SESSION["cart"]);
-        if($index !== false)
+       echo "<table border='1' class='cartTable'>";
+       
+       echo "<tr><th>Room Reserved</th></tr><br>";
+       
+       if(!in_array($_GET["addCart"],$_SESSION["roomsselected"]))
+          {
+            array_push($_SESSION["roomsselected"],$_GET["addCart"]);
+          }
+       foreach($_SESSION["roomsselected"] as $row)
             {
-                unset($_SESSION["cart"][$index]);
+                echo "<tr>";
+                echo "<td>" . $row . "</td>" ;
+                echo "</tr>";
             }
-        showCart();
-    }
-
-
-
-function showCart ()
-    {
-        foreach($_SESSION["cart"] as $room)
-            {
-                echo $room . "<br>";
-            }
-     
-    }
-
-
-
-
-
+        echo "</table border>";
+       }
 
 
 

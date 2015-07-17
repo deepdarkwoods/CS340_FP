@@ -6,3 +6,13 @@
 # selectedRoom {
     color:red;
 }
+
+.cartTable{
+    float:right;
+    
+}
+
+#roomTable{
+    float:left;
+    
+}
