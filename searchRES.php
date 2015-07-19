@@ -22,12 +22,13 @@ if(isset($_POST["searchNum"]) && $_POST["searchNum"] !="")
     {
       
         $searchNum = intval($_POST["searchNum"]);
-        $stmt1 =    "SELECT reservation,checkin,checkout,adults,children,fname,lname,room,price,floor,sqft,beds
+        $stmt1 =    "SELECT reservation,checkin,checkout,adults,children,fname,lname
                     FROM guest
                     INNER JOIN reservations ON guest.id = reservations.guestid
-                    INNER JOIN reservations_rooms ON reservations.reservation = reservations_rooms.resid
-                    INNER JOIN rooms ON reservations_rooms.roomid = rooms.room
-                    WHERE reservation = $searchNum";
+                    INNER JOIN reservations_rooms ON reservations.reservation = reservations_rooms.resid                    
+                    WHERE reservation = $searchNum
+                    GROUP BY reservation";
+                    
          $result = $db->query($stmt1);
          showResults($result);     
         
@@ -38,12 +39,13 @@ elseif(isset($_POST["searchName"]) && $_POST["searchName"] !="")
     {
         
         $searchName = ($_POST["searchName"]);        
-        $stmt1 =    "SELECT reservation,checkin,checkout,adults,children,fname,lname,room,price,floor,sqft,beds
+        $stmt1 =    "SELECT reservation,checkin,checkout,adults,children,fname,lname
                     FROM guest
                     INNER JOIN reservations ON guest.id = reservations.guestid
-                    INNER JOIN reservations_rooms ON reservations.reservation = reservations_rooms.resid
-                    INNER JOIN rooms ON reservations_rooms.roomid = rooms.room
-                    WHERE lname = '{$searchName}'";
+                    INNER JOIN reservations_rooms ON reservations.reservation = reservations_rooms.resid                    
+                    WHERE lname = '{$searchName}'
+                    GROUP BY reservation";
+                   
          $result = $db->query($stmt1);
          showResults($result);        
         
@@ -54,11 +56,11 @@ else
 //
     {
 
-        $stmt1 =    "SELECT reservation,checkin,checkout,adults,children,fname,lname,room,price,floor,sqft,beds
+        $stmt1 =    "SELECT reservation,checkin,checkout,adults,children,fname,lname
                     FROM guest
                     INNER JOIN reservations ON guest.id = reservations.guestid
                     INNER JOIN reservations_rooms ON reservations.reservation = reservations_rooms.resid
-                    INNER JOIN rooms ON reservations_rooms.roomid = rooms.room
+                    GROUP BY reservation
                     ORDER BY lname";   
                  
         $result = $db->query($stmt1);
@@ -89,8 +91,8 @@ function showResults($result)
             echo "<p>$num_results reservation(s) found !</p>";
             echo "<table border='1>' style='text-align:right'";
             echo    "<tr>  <th>Reservation#   </th><th>Date From  </th><th>Date To  </th><th>Adults  </th><th>Child  </th>
-                    <th>First Name </th><th>Last Name </th>
-                    <th>Room </th>  <th>Price </th> <th>Floor </th> <th>Sq Ft </th>   <th>Beds </th>  </tr>";
+                    <th>First Name </th><th>Last Name </th> <th> Modify </th>   <th> Delete </th></tr>";
+                     
             
             for($i = 0; $i < $num_results;$i++)
                 {
@@ -110,18 +112,25 @@ function showResults($result)
                     
                     echo "<td>" . $row['fname'] . "</td>";
                     
-                    echo "<td>" . $row['lname'] . "</td>";
+                    echo "<td>" . $row['lname'] . "</td>";                   
+                   
+                   
                     
-                    echo "<td>" . $row['room'] . "</td>";
-                    
-                    echo "<td>$ " . $row['price'] . "</td>";
-                    
-                    echo "<td>" . $row['floor'] . "</td>";
-                    
-                    echo "<td>" . $row['sqft'] . "</td>";
-                    
-                    echo "<td>" . $row['beds'] . "</td>";
-                    
+                    //modify reservation button
+                    $url = "rezDetail.php?rez={$row['reservation']}";
+                     
+                    echo    "<td>
+                            <form action={$url} method='post'>
+                            <input type='submit' value='Modify'>
+                            </form>
+                            </td>";
+                            
+                    //delete reservation button
+                    $rezNum = $row['reservation'];
+                     echo   "<td>                           
+                            <button onclick='deleteRez($rezNum)' value='Delete'>Delete</button>                        
+                            </td>";
+                                                        
                     echo "</tr>";         
                     
                 }
@@ -132,3 +141,7 @@ function showResults($result)
 }
 
 ?>
+
+<p id="deleteMsg"></p>
+
+<script type="text/javascript" src="ajax.js"></script>

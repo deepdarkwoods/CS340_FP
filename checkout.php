@@ -96,8 +96,8 @@ else
     <p>Credit Card Info</p>
     <input type="text" name="Credit_Card" required>Credit Card Number<br>
     <input type="date" name="Exp_Date" required>Expiration Date<br>
-    <input type="fname" name="CCfname" required>First Name on Card<br>
-    <input type="fname" name="CClname" required>Last Name on Card<br>
+    <input type="fname" name="CCfirst" required>First Name on Card<br>
+    <input type="fname" name="CClast" required>Last Name on Card<br>
     
 <input type="submit" name="Submit" required><br>
 </form>

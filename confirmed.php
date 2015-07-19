@@ -17,6 +17,10 @@ $email = $_POST["Email"];
 $phone = $_POST["Phone"];
 $adults = $_POST["Adults"];
 $child = $_POST["Children"];
+$ccNum = $_POST["Credit_Card"];
+$ccFirst = $_POST["CCfirst"];
+$ccLast = $_POST["CClast"];
+$ccDate = $_POST["Exp_Date"];
 
 
 
@@ -25,7 +29,9 @@ if($db->connect_errno)
     {
         echo "Failed to Connect to Server. Server Error -> " . $db->connect_errno;
     }
-   
+
+
+
    
     
  /**** Add Customer to Table 'guest' ****/   
@@ -57,7 +63,19 @@ else
         {echo $firstN . " " . $lastN . " , your Guest Number is " . $ID['id'] . "<br>" ; }
         
 
+ /**** Add Credit Card to Table 'creditcards' references guestID ****/
+$addCC = "INSERT INTO creditcards
+        (cardnumber,expdate,fname,lname,guestid)
+        VALUES
+        ('{$ccNum}','{$ccDate}','{$ccFirst}','{$ccLast}','{$ID['id']}')
+        ";
+        
+$result9 = $db->query($addCC);
+if($result9 === FALSE){echo "Credit Card Number was not update";}
 
+
+
+ 
 
 /**** Add Reservation to Table 'reservations'*/
 $addRez = "INSERT INTO reservations
