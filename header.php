@@ -7,6 +7,9 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <div>
-    <a href="user.php">Home</a>
+     <h1>Hotel Reservations</h1>
+    <a href="user.php"><img id="logo" src="logo.jpg"><div id="homeLink">------home</div></a>
+    <br>
 </div>
 
+    

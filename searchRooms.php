@@ -9,8 +9,9 @@ $checkoutDate = $_POST["checkout"];
 $_SESSION["checkin"] = $checkinDate;
 $_SESSION["checkout"] = $checkoutDate;
 
-
-
+//
+ echo "<div id='cart'></div>";
+ 
 //connect to mySQL server
 $db = new mysqli('localhost','brad','brad','hotel');
 if($db->connect_errno)
@@ -81,7 +82,7 @@ else
             }
         
         echo "</table><br>";
-        echo "<div id='cart'></div>";
+       
     }
 
 

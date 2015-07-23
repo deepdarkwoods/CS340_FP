@@ -1,6 +1,3 @@
-
-
-
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
@@ -14,7 +11,7 @@ include 'header.php';
 
 
 <body>    
-    <h1>Hotel Reservations</h1>
+   
     
     <form action="searchRooms.php" method="post">
         <fieldset><legend>Add a Reservation</legend>
@@ -42,3 +39,14 @@ include 'header.php';
 
 </body>
 </html>
+
+<?php
+if(isset($_GET["changes"]))
+    {
+        echo "Update Successful !";
+    }
+?>
+
+
+
+

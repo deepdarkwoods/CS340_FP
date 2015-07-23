@@ -15,6 +15,19 @@ if($db->connect_errno)
 
 
 
+/****  Delete credit card tied to reservation   ******/
+
+$stmt3 =     "DELETE FROM creditcards
+            WHERE resid = $rez";
+
+$deleteCC = $db->query($stmt3);
+if($deleteCC === FALSE) {echo "Problem encountered with deleting credit card";}
+
+
+
+
+
+
 /****  Delete from Relational Table First ' reservations_roooms'   ******/
 
 $stmt1 =     "DELETE FROM reservations_rooms

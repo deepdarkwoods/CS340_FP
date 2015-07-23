@@ -22,10 +22,10 @@ if(isset($_POST["searchNum"]) && $_POST["searchNum"] !="")
     {
       
         $searchNum = intval($_POST["searchNum"]);
-        $stmt1 =    "SELECT reservation,checkin,checkout,adults,children,fname,lname
+        $stmt1 =    "SELECT reservation,checkin,checkout,adults,children,guest.fname,guest.lname,guest.id,cardnumber
                     FROM guest
-                    INNER JOIN reservations ON guest.id = reservations.guestid
-                    INNER JOIN reservations_rooms ON reservations.reservation = reservations_rooms.resid                    
+                    INNER JOIN reservations ON guest.id = reservations.guestid                   
+                    INNER JOIN creditcards ON creditcards.resid = reservations.reservation
                     WHERE reservation = $searchNum
                     GROUP BY reservation";
                     
@@ -39,10 +39,10 @@ elseif(isset($_POST["searchName"]) && $_POST["searchName"] !="")
     {
         
         $searchName = ($_POST["searchName"]);        
-        $stmt1 =    "SELECT reservation,checkin,checkout,adults,children,fname,lname
+        $stmt1 =    "SELECT reservation,checkin,checkout,adults,children,guest.fname,guest.lname,guest.id,cardnumber
                     FROM guest
                     INNER JOIN reservations ON guest.id = reservations.guestid
-                    INNER JOIN reservations_rooms ON reservations.reservation = reservations_rooms.resid                    
+                    INNER JOIN creditcards ON reservations.reservation = creditcards.resid                   
                     WHERE lname = '{$searchName}'
                     GROUP BY reservation";
                    
@@ -56,10 +56,10 @@ else
 //
     {
 
-        $stmt1 =    "SELECT reservation,checkin,checkout,adults,children,fname,lname
+        $stmt1 =    "SELECT reservation,checkin,checkout,adults,children,guest.fname,guest.lname,guest.id,cardnumber
                     FROM guest
                     INNER JOIN reservations ON guest.id = reservations.guestid
-                    INNER JOIN reservations_rooms ON reservations.reservation = reservations_rooms.resid
+                    INNER JOIN creditcards ON reservations.reservation = creditcards.resid
                     GROUP BY reservation
                     ORDER BY lname";   
                  
@@ -89,8 +89,8 @@ function showResults($result)
         {
     
             echo "<p>$num_results reservation(s) found !</p>";
-            echo "<table border='1>' style='text-align:right'";
-            echo    "<tr>  <th>Reservation#   </th><th>Date From  </th><th>Date To  </th><th>Adults  </th><th>Child  </th>
+            echo "<table border='1' class='table' style='text-align:right'";
+            echo    "<tr class='table'>  <th>Reservation #   </th><th>Date From  </th><th>Date To  </th><th>Adults  </th><th>Child  </th>
                     <th>First Name </th><th>Last Name </th> <th> Modify </th>   <th> Delete </th></tr>";
                      
             
@@ -117,10 +117,10 @@ function showResults($result)
                    
                     
                     //modify reservation button
-                    $url = "rezDetail.php?rez={$row['reservation']}";
+                    $url = "rezDetail.php?rez={$row['reservation']}&in={$row['checkin']}&out={$row['checkout']}&fname={$row['fname']}&lname={$row['lname']}&guestid={$row['id']}&cc={$row['cardnumber']}";
                      
                     echo    "<td>
-                            <form action={$url} method='post'>
+                            <form action={$url} method='post'>                            
                             <input type='submit' value='Modify'>
                             </form>
                             </td>";

@@ -3,6 +3,7 @@ session_start();
 error_reporting(E_ALL);
 include 'header.php';
 
+
 //create short variables
 $roomList = $_SESSION["roomsselected"];
 $inDate = $_SESSION["checkin"];
@@ -63,15 +64,6 @@ else
         {echo $firstN . " " . $lastN . " , your Guest Number is " . $ID['id'] . "<br>" ; }
         
 
- /**** Add Credit Card to Table 'creditcards' references guestID ****/
-$addCC = "INSERT INTO creditcards
-        (cardnumber,expdate,fname,lname,guestid)
-        VALUES
-        ('{$ccNum}','{$ccDate}','{$ccFirst}','{$ccLast}','{$ID['id']}')
-        ";
-        
-$result9 = $db->query($addCC);
-if($result9 === FALSE){echo "Credit Card Number was not update";}
 
 
 
@@ -102,7 +94,16 @@ if($RezNum === FALSE)
 else
         {echo "Your Reservation # is " . $RezNum['reservation'] ; }     
             
-            
+ /**** Add Credit Card to Table 'creditcards' references guestID ****/
+$addCC = "INSERT INTO creditcards
+        (cardnumber,expdate,fname,lname,resid)
+        VALUES
+        ('{$ccNum}','{$ccDate}','{$ccFirst}','{$ccLast}',{$RezNum['reservation']})
+        ";
+        
+$result9 = $db->query($addCC);
+if($result9 === FALSE){echo "Credit Card Number was not updated";}
+         
             
          
             
@@ -121,8 +122,14 @@ else
     if($result5 === FALSE){echo "relation not added <br>";}
     }    
         
-        
-        
+
+
+
+//Unset Variables and destroy session
+$_SESSION = array(); 
+session_unset();
+session_destroy();
+
         
         
         

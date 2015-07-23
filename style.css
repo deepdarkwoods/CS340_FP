@@ -1,18 +1,35 @@
 
 * {
     font-family: calibri;
+    font-size: 20px;
 }
 
-# selectedRoom {
-    color:red;
+.table {
+    font-family: calibri;
+    font-size: 20px;
 }
 
-.cartTable{
-    float:right;
+
+h1 {
+    font-size: 30px; 
     
 }
 
-#roomTable{
-    float:left;
+#logo {
+    width: 100px;
+    height:100px;
+}
+
+form {
+    width:25%;
     
+}
+
+.blue{
+    color:blue;
+}
+
+#homeLink {
+    font-size: 16px;
+   
 }
