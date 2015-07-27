@@ -20,6 +20,8 @@ if($db->connect_errno)
 /*******************************************/
   
 
+
+//changes the reservation date for the hotel guest
 $stmt = "SELECT checkin,checkout
         FROM reservations
         WHERE reservation = '{$rez}'";

@@ -25,6 +25,10 @@ $ccDate = $_POST["Exp_Date"];
 
 
 
+
+
+
+//Connect to mySQL Server
 $db = new mysqli('localhost','brad','brad','hotel');
 if($db->connect_errno)
     {
@@ -46,6 +50,8 @@ if($result === FALSE)
         {echo "Error number $db->errno"; }    
 else
         {echo "Guest Added Successfully !<br>"; }
+        
+        
         
         
         
@@ -80,6 +86,9 @@ if($result3 === FALSE)
         {echo "Error number $db->errno"; }
         
         
+        
+        
+        
 
 /*** Find New Reservation # for Guest ***/         
 $findRez =  "SELECT reservation
@@ -93,6 +102,11 @@ if($RezNum === FALSE)
         {echo "Error number $db->errno"; }    
 else
         {echo "Your Reservation # is " . $RezNum['reservation'] ; }     
+            
+      
+      
+            
+            
             
  /**** Add Credit Card to Table 'creditcards' references guestID ****/
 $addCC = "INSERT INTO creditcards
@@ -122,6 +136,7 @@ if($result9 === FALSE){echo "Credit Card Number was not updated";}
     if($result5 === FALSE){echo "relation not added <br>";}
     }    
         
+
 
 
 

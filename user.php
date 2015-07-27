@@ -3,15 +3,16 @@ error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
 include 'header.php';
+
+
+
+//HomePage for Hotel Workers
 ?>
 
 
 
 <html>
-
-
-<body>    
-   
+<body>     
     
     <form action="searchRooms.php" method="post">
         <fieldset><legend>Add a Reservation</legend>
@@ -33,12 +34,10 @@ include 'header.php';
         </fieldset> 
     </form><br>
 
-       
-    
-    
-
 </body>
 </html>
+
+
 
 <?php
 if(isset($_GET["changes"]))

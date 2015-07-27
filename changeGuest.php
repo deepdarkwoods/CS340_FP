@@ -20,6 +20,11 @@ if($db->connect_errno)
     }
 /*******************************************/
 
+
+
+
+
+//updates contact information for guest
 $stmt = "SELECT fname,lname,street,city,state,zip,email,phone
         FROM guest
         WHERE guest.id = '{$id}'";

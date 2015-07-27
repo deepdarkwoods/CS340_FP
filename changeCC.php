@@ -19,15 +19,15 @@ if($db->connect_errno)
     }
 /*******************************************/
   
-
+  
+  
+//user can update any field in the creditcards table
 $stmt = "SELECT cardnumber,expdate,fname,lname
         FROM creditcards
         WHERE cardnumber = '{$cc}'";
         
 $result = $db->query($stmt);
-
 $row = $result->fetch_assoc();
-
 
 ?>
 

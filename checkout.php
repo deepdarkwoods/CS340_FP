@@ -14,6 +14,7 @@ if($db->connect_errno)
     
       
 
+//Show rooms reserved in the Cart
 $stmt1 = "      SELECT room,price,floor,sqft,beds
                 FROM rooms                
                 WHERE room IN
@@ -21,6 +22,9 @@ $stmt1 = "      SELECT room,price,floor,sqft,beds
                
         ";
         
+        
+        
+//Show Total for cart
 $stmt2 = "      SELECT SUM(price) as total
                 FROM rooms                
                 WHERE room IN
@@ -39,14 +43,13 @@ if($result === FALSE || $result2 === FALSE )
     }
 else
          
-          
+
+
+//Display Cart        
     {
         $num_results = $result->num_rows;
         
-        echo "<p>$num_results room(s) in cart.</p>";
-        
-        
-        
+        echo "<p>$num_results room(s) in cart.</p>";      
         echo "<table border='1'  style='text-align:right'";     
         echo "<tr>  <th>Room    </th><th>Floor  </th><th>Sq Ft  </th><th>Beds  </th><th>Price  </th>   </tr>";
         
@@ -97,8 +100,7 @@ else
     <input type="text" name="Credit_Card" required>Credit Card Number<br>
     <input type="date" name="Exp_Date" required>Expiration Date<br>
     <input type="fname" name="CCfirst" required>First Name on Card<br>
-    <input type="fname" name="CClast" required>Last Name on Card<br>
-    
+    <input type="fname" name="CClast" required>Last Name on Card<br>    
 <input type="submit" name="Submit" required><br>
 </form>
     

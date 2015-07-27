@@ -1,5 +1,5 @@
 
-
+//User clicks on room to reserve, updates cart
 function addtoCart(room)
   {
         var xmlhttp = new XMLHttpRequest();
@@ -9,8 +9,7 @@ function addtoCart(room)
             }
         }
         xmlhttp.open("GET", "cart.php?addCart=" + room, true);
-        xmlhttp.send();
-    
+        xmlhttp.send();    
     
   }
   
@@ -18,7 +17,7 @@ function addtoCart(room)
   
   
   
-  
+//user clicks on reservatino to delete, updates mysql tables
 function deleteRez(rezNum)
   {
      var xmlhttp = new XMLHttpRequest();
@@ -28,10 +27,26 @@ function deleteRez(rezNum)
             }
         }
         xmlhttp.open("GET", "deleteRez.php?rezToDelete=" + rezNum, true);
-        xmlhttp.send();
-    
+        xmlhttp.send();    
   }
   
+  
+  
+
+//user can delete individual rooms from a reservation  
+function deleteRoom(room,rez)
+  {
+     var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                //document.getElementById("deleteresponse").innerHTML = xmlhttp.responseText;
+                document.getElementById("replaceTable").innerHTML = xmlhttp.responseText;
+                
+            }
+        }
+        xmlhttp.open("GET", "deleteRoomfromRes.php?room="+ room + "&rez=" + rez, true);
+        xmlhttp.send();    
+  }
   
   
   
