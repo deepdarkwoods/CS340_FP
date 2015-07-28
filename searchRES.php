@@ -1,20 +1,7 @@
 <?php
 error_reporting(E_ALL);
 include 'header.php';
-
-
-
-//taken from class book, page 270 Ch.11
-/*******************************************/
-$db = new mysqli('localhost','brad','brad','hotel');
-if($db->connect_errno)
-    {
-        echo "Failed to Connect to Server. Server Error -> " . $db->connect_errno;
-    }
-/*******************************************/
-
-
-
+include 'connection.php';
 
 
 //user has entered a reservation number
@@ -39,14 +26,14 @@ elseif(isset($_POST["searchName"]) && $_POST["searchName"] !="")
     {
         
         $searchName = ($_POST["searchName"]);        
-        $stmt1 =    "SELECT reservation,checkin,checkout,adults,children,guest.fname,guest.lname,guest.id,cardnumber
+        $stmt9 =    "SELECT reservation,checkin,checkout,adults,children,guest.fname,guest.lname,guest.id,cardnumber
                     FROM guest
                     INNER JOIN reservations ON guest.id = reservations.guestid
-                    INNER JOIN creditcards ON reservations.reservation = creditcards.resid                   
-                    WHERE lname = '{$searchName}'
+                    INNER JOIN creditcards ON creditcards.resid = reservations.reservation                   
+                    WHERE guest.lname = '{$searchName}'
                     GROUP BY reservation";
                    
-         $result = $db->query($stmt1);
+         $result = $db->query($stmt9);
          showResults($result);        
         
     }

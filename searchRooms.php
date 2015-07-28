@@ -3,6 +3,7 @@ session_start();
 
 error_reporting(E_ALL);
 include 'header.php';
+include 'connection.php';
 
 $checkinDate = $_POST["checkin"];
 $checkoutDate = $_POST["checkout"];
@@ -23,19 +24,11 @@ else
         
         
         
-        //
-         echo "<div id='cart'></div>";
+       
+echo "<div id='cart'></div>";
          
-        //connect to mySQL server
-        $db = new mysqli('localhost','brad','brad','hotel');
-        if($db->connect_errno)
-            {
-                echo "Failed to Connect to Server. Server Error -> " . $db->connect_errno;
-            }
-            
-              
+ 
         
-        //taken from class book, page 270 Ch.11
         $stmt1 = "      SELECT room,price,floor,sqft,beds
                         FROM rooms                
                         WHERE room NOT IN

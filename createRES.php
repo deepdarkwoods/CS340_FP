@@ -1,18 +1,15 @@
 <?php
 error_reporting(E_ALL);
 include 'header.php';
+include 'connection.php';
 
 $checkinDate = $_POST["checkin"];
 $checkoutDate = $_POST["checkout"];
 
-//connect to mySQL server
-$db = new mysqli('localhost','brad','brad','hotel');
-if($db->connect_errno)
-    {
-        echo "Failed to Connect to Server. Server Error -> " . $db->connect_errno;
-    }
 
-//taken from class book, page 270 Ch.11
+
+
+
 $stmt1 = "SELECT room,price,floor,sqft,beds FROM rooms";
 $result = $db->query($stmt1);
 $num_results = $result->num_rows;

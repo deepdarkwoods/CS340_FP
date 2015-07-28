@@ -2,6 +2,7 @@
 session_start();
 error_reporting(E_ALL);
 include 'header.php';
+include 'connection.php';
 
 
 //create short variables
@@ -26,18 +27,6 @@ $ccDate = $_POST["Exp_Date"];
 
 
 
-
-
-//Connect to mySQL Server
-$db = new mysqli('localhost','brad','brad','hotel');
-if($db->connect_errno)
-    {
-        echo "Failed to Connect to Server. Server Error -> " . $db->connect_errno;
-    }
-
-
-
-   
     
  /**** Add Customer to Table 'guest' ****/   
 $addGuest = "INSERT INTO guest

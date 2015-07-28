@@ -1,6 +1,7 @@
 <?php
 error_reporting(E_ALL);
 include 'header.php';
+include 'connection.php';
 
 
 //create short variable names
@@ -36,18 +37,6 @@ echo "<form action='changeCC.php?cc={$cc}&go=1' method='post'>";
 echo "<input type='submit' value='edit'>";
 echo " Card Number: ".  $cc . " " ;
 echo "</form><br>";
-
-
-
-//Connect to mySQL Server
-/*******************************************/
-$db = new mysqli('localhost','brad','brad','hotel');
-if($db->connect_errno)
-    {
-        echo "Failed to Connect to Server. Server Error -> " . $db->connect_errno;
-    }
-/*******************************************/
-
 
 
 

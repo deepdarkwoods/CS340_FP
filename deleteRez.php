@@ -1,17 +1,9 @@
 <?php
 error_reporting(E_ALL);
+include 'connection.php';
 
 $rez = $_GET["rezToDelete"];
 
-
-//connect to mySQL
-/*******************************************/
-$db = new mysqli('localhost','brad','brad','hotel');
-if($db->connect_errno)
-    {
-        echo "Failed to Connect to Server. Server Error -> " . $db->connect_errno;
-    }
-/*******************************************/
 
 
 

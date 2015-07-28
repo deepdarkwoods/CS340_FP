@@ -1,6 +1,7 @@
 <?php
 error_reporting(E_ALL);
 include 'header.php';
+include 'connection.php';
 
 if(!isset($_GET['go']))
     {
@@ -8,20 +9,6 @@ if(!isset($_GET['go']))
     }
 
 $id = $_GET['id'];
-
-
-
-//CONNECT TO SERVER
-/*******************************************/
-$db = new mysqli('localhost','brad','brad','hotel');
-if($db->connect_errno)
-    {
-        echo "Failed to Connect to Server. Server Error -> " . $db->connect_errno;
-    }
-/*******************************************/
-
-
-
 
 
 //updates contact information for guest

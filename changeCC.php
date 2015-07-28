@@ -1,6 +1,9 @@
 <?php
 error_reporting(E_ALL);
 include 'header.php';
+include 'connection.php';
+
+
 
 if(!isset($_GET['go']))
     {
@@ -10,17 +13,7 @@ if(!isset($_GET['go']))
 $cc = $_GET['cc'];
 
 
-//CONNECT TO SERVER
-/*******************************************/
-$db = new mysqli('localhost','brad','brad','hotel');
-if($db->connect_errno)
-    {
-        echo "Failed to Connect to Server. Server Error -> " . $db->connect_errno;
-    }
-/*******************************************/
-  
-  
-  
+
 //user can update any field in the creditcards table
 $stmt = "SELECT cardnumber,expdate,fname,lname
         FROM creditcards

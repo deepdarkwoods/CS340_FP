@@ -1,22 +1,11 @@
 <?php
 error_reporting(E_ALL);
+include 'connection.php';
 
 
 $room = $_GET["room"];
 $res = $_GET["rez"];
 
-
-
-
-//CONNECT TO SERVER
-/*******************************************/
-$db = new mysqli('localhost','brad','brad','hotel');
-if($db->connect_errno)
-    {
-        echo "Failed to Connect to Server. Server Error -> " . $db->connect_errno;
-    }
-/*******************************************/
-  
   
   
 //Remove reservation from Relationship Table to rooms. 
